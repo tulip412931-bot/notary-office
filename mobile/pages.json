@@ -1,0 +1,51 @@
+{
+  "pages": [
+    { "path": "pages/index/index", "style": { "navigationStyle": "custom" } },
+    { "path": "pages/merchant/list", "style": { "navigationBarTitleText": "商家列表" } },
+    { "path": "pages/order/list", "style": { "navigationBarTitleText": "我的订单" } },
+    { "path": "pages/mine/index", "style": { "navigationStyle": "custom" } },
+    { "path": "pages/login/index", "style": { "navigationBarTitleText": "登录" } },
+    { "path": "pages/register/index", "style": { "navigationBarTitleText": "注册" } },
+    { "path": "pages/merchant/detail", "style": { "navigationBarTitleText": "商家详情" } },
+    { "path": "pages/product/detail", "style": { "navigationBarTitleText": "商品详情" } },
+    { "path": "pages/order/confirm", "style": { "navigationBarTitleText": "确认订单" } },
+    { "path": "pages/order/detail", "style": { "navigationBarTitleText": "订单详情" } },
+    { "path": "pages/refund/apply", "style": { "navigationBarTitleText": "退费申请" } },
+    { "path": "pages/refund/list", "style": { "navigationBarTitleText": "退费记录" } },
+    { "path": "pages/complaint/submit", "style": { "navigationBarTitleText": "投诉建议" } },
+    { "path": "pages/notification/list", "style": { "navigationBarTitleText": "消息通知" } },
+    { "path": "pages/fund/detail", "style": { "navigationBarTitleText": "资金明细" } },
+    { "path": "pages/auth/verify", "style": { "navigationBarTitleText": "实名认证" } },
+    { "path": "pages/contract/sign", "style": { "navigationBarTitleText": "合同签署" } },
+    { "path": "pages/help/index", "style": { "navigationBarTitleText": "帮助中心" } },
+    { "path": "pages/merchant-admin/index", "style": { "navigationStyle": "custom" } },
+    { "path": "pages/merchant-admin/verify", "style": { "navigationBarTitleText": "核销管理" } },
+    { "path": "pages/merchant-admin/fund", "style": { "navigationBarTitleText": "资金管理" } },
+    { "path": "pages/merchant-admin/products", "style": { "navigationBarTitleText": "商品管理" } }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "公证预付费监管平台",
+    "navigationBarBackgroundColor": "#1a3c6e",
+    "backgroundColor": "#f5f6fa",
+    "app-plus": { "titleNView": false }
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#1a3c6e",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页", "iconPath": "static/tab-home.png", "selectedIconPath": "static/tab-home-active.png" },
+      { "pagePath": "pages/merchant/list", "text": "商家", "iconPath": "static/tab-merchant.png", "selectedIconPath": "static/tab-merchant-active.png" },
+      { "pagePath": "pages/order/list", "text": "订单", "iconPath": "static/tab-order.png", "selectedIconPath": "static/tab-order-active.png" },
+      { "pagePath": "pages/mine/index", "text": "我的", "iconPath": "static/tab-mine.png", "selectedIconPath": "static/tab-mine-active.png" }
+    ]
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  }
+}

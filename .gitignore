@@ -1,0 +1,28 @@
+# Java
+target/
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+
+# Node
+node_modules/
+dist/
+.DS_Store
+
+# UniApp
+unpackage/
+
+# IDE
+.vscode/
+*.swp
+*.swo
+
+# Test artifacts
+test-results/
+playwright-*.cjs
+
+# Env
+.env
+.env.local

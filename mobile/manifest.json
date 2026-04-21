@@ -1,0 +1,23 @@
+{
+  "name": "公证预付费监管平台",
+  "appid": "__UNI__NOTARY01",
+  "description": "公证处预付费资金监管平台移动端",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "app-plus": {
+    "usingComponents": true,
+    "nvueStyleCompiler": "uni-app",
+    "compilerVersion": 3,
+    "splashscreen": { "alwaysShowBeforeRender": true, "waiting": true, "autoclose": true, "delay": 0 },
+    "modules": {},
+    "distribute": {
+      "android": { "permissions": ["<uses-permission android:name=\"android.permission.CAMERA\"/>", "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"/>"] },
+      "ios": {},
+      "sdkConfigs": {}
+    }
+  },
+  "mp-weixin": { "appid": "", "setting": { "urlCheck": false }, "usingComponents": true },
+  "h5": { "devServer": { "port": 8080 }, "title": "公证预付费监管平台" },
+  "vueVersion": "3"
+}
