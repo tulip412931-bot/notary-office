@@ -39,7 +39,6 @@ const filteredOrders = computed(() => {
 })
 
 const loadData = async () => {
-  if (!isLoggedIn()) return
   try {
     const res = await apiGetOrders()
     orders.value = res.data.list || []

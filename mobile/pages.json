@@ -45,7 +45,12 @@
   "easycom": {
     "autoscan": true,
     "custom": {
-      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+      "^merchant-card$": "@/components/merchant-card.vue",
+      "^order-card$": "@/components/order-card.vue",
+      "^status-badge$": "@/components/status-badge.vue",
+      "^empty-state$": "@/components/empty-state.vue",
+      "^contract-viewer$": "@/components/contract-viewer.vue"
     }
   }
 }
