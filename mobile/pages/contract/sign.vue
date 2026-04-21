@@ -62,22 +62,20 @@ const handleSign = async () => {
   }
 
   uni.showLoading({ title: '签署中...' })
-  // Simulate signing process
-  setTimeout(async () => {
-    try {
-      await apiSignContract({
-        contractNo: contractNo.value,
-        merchantName: merchantName.value,
-        amount: amount.value
-      })
-      isSigned.value = true
-      signDate.value = formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss')
-      uni.hideLoading()
-      uni.showToast({ title: '签署成功', icon: 'success' })
-    } catch (e) {
-      uni.hideLoading()
-    }
-  }, 1500)
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1500))
+    await apiSignContract({
+      contractNo: contractNo.value,
+      merchantName: merchantName.value,
+      amount: amount.value
+    })
+    isSigned.value = true
+    signDate.value = formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss')
+    uni.hideLoading()
+    uni.showToast({ title: '签署成功', icon: 'success' })
+  } catch (e) {
+    uni.hideLoading()
+  }
 }
 
 onMounted(() => {

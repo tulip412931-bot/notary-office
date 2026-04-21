@@ -18,32 +18,35 @@
       </div>
 
       <el-table :data="tableData" stripe v-loading="loading">
-        <el-table-column prop="id" label="商户编号" width="90" />
+        <el-table-column prop="id" label="商户编号" width="90" align="center" />
         <el-table-column prop="name" label="商户名称" min-width="180" show-overflow-tooltip />
-        <el-table-column prop="industry" label="行业" width="100" />
+        <el-table-column prop="industry" label="行业" width="100" align="center" />
         <el-table-column prop="contact" label="联系人" width="80" />
         <el-table-column prop="phone" label="联系电话" width="130" />
-        <el-table-column label="托管余额" width="120">
+        <el-table-column label="托管余额" width="120" align="right">
           <template #default="{ row }">¥{{ row.escrowBalance?.toLocaleString() }}</template>
         </el-table-column>
-        <el-table-column label="信用评分" width="90">
+        <el-table-column label="信用评分" width="90" align="center">
           <template #default="{ row }">
             <span :style="{ color: row.creditScore >= 80 ? '#67c23a' : row.creditScore >= 60 ? '#e6a23c' : '#f56c6c', fontWeight: 600 }">{{ row.creditScore || '-' }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="90">
+        <el-table-column label="状态" width="90" align="center">
           <template #default="{ row }">
             <el-tag :type="statusType(row.status)" size="small">{{ statusLabel(row.status) }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="registeredAt" label="注册日期" width="110" />
-        <el-table-column label="操作" width="180" fixed="right">
+        <el-table-column prop="registeredAt" label="注册日期" width="110" align="center" />
+        <el-table-column label="操作" width="180" fixed="right" align="center">
           <template #default="{ row }">
             <el-button link type="primary" size="small" @click="showDetail(row)">详情</el-button>
             <el-button link type="primary" size="small" @click="openReview(row)" v-if="row.status==='pending'">审核</el-button>
             <el-button link type="danger" size="small" @click="doBlacklist(row)" v-if="row.status==='approved'">拉黑</el-button>
           </template>
         </el-table-column>
+        <template #empty>
+          <el-empty description="暂无商户数据" :image-size="80" />
+        </template>
       </el-table>
     </div>
 

@@ -10,24 +10,27 @@
     </div>
 
     <el-table :data="tableData" stripe v-loading="loading">
-      <el-table-column prop="id" label="产品编号" width="90" />
+      <el-table-column prop="id" label="产品编号" width="90" align="center" />
       <el-table-column prop="name" label="产品名称" min-width="160" show-overflow-tooltip />
       <el-table-column prop="merchantName" label="所属商户" min-width="160" show-overflow-tooltip />
-      <el-table-column prop="industry" label="行业" width="100" />
-      <el-table-column label="价格" width="100"><template #default="{ row }">¥{{ row.price?.toLocaleString() }}</template></el-table-column>
-      <el-table-column label="服务期限" width="90"><template #default="{ row }">{{ row.duration }}个月</template></el-table-column>
-      <el-table-column label="状态" width="90">
+      <el-table-column prop="industry" label="行业" width="100" align="center" />
+      <el-table-column label="价格" width="100" align="right"><template #default="{ row }">¥{{ row.price?.toLocaleString() }}</template></el-table-column>
+      <el-table-column label="服务期限" width="90" align="center"><template #default="{ row }">{{ row.duration }}个月</template></el-table-column>
+      <el-table-column label="状态" width="90" align="center">
         <template #default="{ row }">
           <el-tag :type="{ pending: 'warning', approved: 'success', rejected: 'danger' }[row.status]" size="small">{{ { pending: '待审核', approved: '已通过', rejected: '已拒绝' }[row.status] }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="createdAt" label="创建日期" width="110" />
-      <el-table-column label="操作" width="120" fixed="right">
+      <el-table-column prop="createdAt" label="创建日期" width="110" align="center" />
+      <el-table-column label="操作" width="120" fixed="right" align="center">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click="openReview(row)" v-if="row.status==='pending'">审核</el-button>
           <el-button link type="primary" size="small" v-else disabled>已处理</el-button>
         </template>
       </el-table-column>
+      <template #empty>
+        <el-empty description="暂无产品数据" :image-size="80" />
+      </template>
     </el-table>
 
     <el-dialog v-model="reviewVisible" title="产品审核" width="480px">

@@ -9,25 +9,28 @@
     </div>
 
     <el-table :data="tableData" stripe v-loading="loading">
-      <el-table-column prop="id" label="退款编号" width="100" />
+      <el-table-column prop="id" label="退款编号" width="100" align="center" />
       <el-table-column prop="orderId" label="订单号" width="120" />
       <el-table-column prop="merchantName" label="商户" min-width="150" show-overflow-tooltip />
       <el-table-column prop="customerName" label="客户" width="80" />
-      <el-table-column label="订单金额" width="100"><template #default="{ row }">¥{{ row.amount?.toLocaleString() }}</template></el-table-column>
-      <el-table-column label="退款金额" width="100"><template #default="{ row }"><span style="color:#c41e3a;font-weight:600">¥{{ row.refundAmount?.toLocaleString() }}</span></template></el-table-column>
+      <el-table-column label="订单金额" width="100" align="right"><template #default="{ row }">¥{{ row.amount?.toLocaleString() }}</template></el-table-column>
+      <el-table-column label="退款金额" width="100" align="right"><template #default="{ row }"><span style="color:#c41e3a;font-weight:600">¥{{ row.refundAmount?.toLocaleString() }}</span></template></el-table-column>
       <el-table-column prop="reason" label="退款原因" min-width="120" show-overflow-tooltip />
-      <el-table-column label="状态" width="90">
+      <el-table-column label="状态" width="90" align="center">
         <template #default="{ row }">
           <el-tag :type="{ pending:'warning', approved:'success', rejected:'danger' }[row.status]" size="small">{{ { pending:'待处理', approved:'已通过', rejected:'已拒绝' }[row.status] }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="createdAt" label="申请日期" width="110" />
-      <el-table-column label="操作" width="100" fixed="right">
+      <el-table-column prop="createdAt" label="申请日期" width="110" align="center" />
+      <el-table-column label="操作" width="100" fixed="right" align="center">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click="openProcess(row)" v-if="row.status==='pending'">处理</el-button>
           <span v-else style="color:#999;font-size:12px">已处理</span>
         </template>
       </el-table-column>
+      <template #empty>
+        <el-empty description="暂无退款申请" :image-size="80" />
+      </template>
     </el-table>
 
     <el-dialog v-model="processVisible" title="处理退款申请" width="480px">

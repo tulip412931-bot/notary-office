@@ -31,15 +31,18 @@
         <el-button type="primary" @click="loadRecords">查询</el-button>
       </div>
       <el-table :data="records" stripe v-loading="loading">
-        <el-table-column prop="id" label="编号" width="100" />
+        <el-table-column prop="id" label="编号" width="100" align="center" />
         <el-table-column prop="orderId" label="订单号" width="120" />
         <el-table-column prop="merchantName" label="商户" min-width="160" show-overflow-tooltip />
-        <el-table-column label="类型" width="100">
+        <el-table-column label="类型" width="100" align="center">
           <template #default="{ row }"><el-tag :type="row.type==='escrow_in'?'':'success'" size="small">{{ row.type==='escrow_in'?'托管入账':'资金释放' }}</el-tag></template>
         </el-table-column>
-        <el-table-column label="金额" width="120"><template #default="{ row }"><span :style="{color:row.type==='escrow_in'?'#67c23a':'#409eff'}">{{ row.type==='escrow_in'?'+':'-' }}¥{{ row.amount?.toLocaleString() }}</span></template></el-table-column>
+        <el-table-column label="金额" width="120" align="right"><template #default="{ row }"><span :style="{color:row.type==='escrow_in'?'#67c23a':'#409eff'}">{{ row.type==='escrow_in'?'+':'-' }}¥{{ row.amount?.toLocaleString() }}</span></template></el-table-column>
         <el-table-column prop="remark" label="备注" min-width="140" show-overflow-tooltip />
-        <el-table-column prop="createdAt" label="时间" width="110" />
+        <el-table-column prop="createdAt" label="时间" width="110" align="center" />
+        <template #empty>
+          <el-empty description="暂无交易记录" :image-size="80" />
+        </template>
       </el-table>
     </div>
 

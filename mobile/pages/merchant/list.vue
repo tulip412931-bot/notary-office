@@ -31,6 +31,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { onShow } from '@dcloudio/uni-app'
 import { apiGetMerchants } from '@/api/index'
 
 const keyword = ref('')
@@ -70,6 +71,14 @@ const goDetail = (id) => {
 }
 
 onMounted(loadData)
+
+onShow(() => {
+  const stored = uni.getStorageSync('selectedIndustry')
+  if (stored) {
+    currentTab.value = stored
+    uni.removeStorageSync('selectedIndustry')
+  }
+})
 </script>
 
 <style lang="scss" scoped>

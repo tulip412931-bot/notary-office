@@ -93,7 +93,7 @@ const handleVerify = async () => {
     uni.showToast({ title: '核销成功', icon: 'success' })
     records.value.unshift({
       id: 'V' + Date.now(),
-      customerName: verifyForm.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1**$2'),
+      customerName: verifyForm.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'),
       productName: verifyForm.productName,
       amount: parseFloat(verifyForm.amount),
       sessions: parseInt(verifyForm.sessions),

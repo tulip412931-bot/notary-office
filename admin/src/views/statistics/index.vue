@@ -11,13 +11,16 @@
       </div>
 
       <!-- Industry table -->
-      <el-table :data="industryData" stripe border style="margin-bottom:24px">
+      <el-table :data="industryData" stripe border style="margin-bottom:24px" v-loading="statsLoading">
         <el-table-column prop="industry" label="行业" width="120" />
-        <el-table-column prop="merchantCount" label="商户数" width="90" />
-        <el-table-column prop="orderCount" label="订单数" width="90" />
-        <el-table-column label="托管金额(万元)" width="130"><template #default="{ row }">{{ (row.escrowAmount / 10000).toFixed(1) }}</template></el-table-column>
-        <el-table-column label="退款率" width="90"><template #default="{ row }"><span :style="{ color: row.refundRate > 5 ? '#f56c6c' : '#67c23a' }">{{ row.refundRate }}%</span></template></el-table-column>
-        <el-table-column prop="complaintCount" label="投诉数" width="90" />
+        <el-table-column prop="merchantCount" label="商户数" width="90" align="center" />
+        <el-table-column prop="orderCount" label="订单数" width="90" align="center" />
+        <el-table-column label="托管金额(万元)" width="130" align="right"><template #default="{ row }">{{ (row.escrowAmount / 10000).toFixed(1) }}</template></el-table-column>
+        <el-table-column label="退款率" width="90" align="center"><template #default="{ row }"><span :style="{ color: row.refundRate > 5 ? '#f56c6c' : '#67c23a' }">{{ row.refundRate }}%</span></template></el-table-column>
+        <el-table-column prop="complaintCount" label="投诉数" width="90" align="center" />
+        <template #empty>
+          <el-empty description="暂无统计数据" :image-size="80" />
+        </template>
       </el-table>
     </div>
 
@@ -46,13 +49,17 @@ import { ElMessage } from 'element-plus'
 
 const dateRange = ref([])
 const industryData = ref([])
+const statsLoading = ref(false)
 const trendChartRef = ref(null)
 const amountChartRef = ref(null)
 
 async function loadData() {
-  const res = await fetchStatistics({})
-  industryData.value = res.industryData || []
-  initCharts(res.monthlyTrend || [])
+  statsLoading.value = true
+  try {
+    const res = await fetchStatistics({})
+    industryData.value = res.industryData || []
+    initCharts(res.monthlyTrend || [])
+  } finally { statsLoading.value = false }
 }
 
 function initCharts(trend) {

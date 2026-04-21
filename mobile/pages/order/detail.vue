@@ -127,8 +127,8 @@ const formatMoney = fm
 
 const statusText = computed(() => getStatusText(order.value.status))
 const statusIcon = computed(() => {
-  const map = { pending: '&#x23F3;', supervising: '&#x1F6E1;', completed: '&#x2705;', refunded: '&#x1F4B0;', refunding: '&#x23F3;' }
-  return map[order.value.status] || '&#x1F4C4;'
+  const map = { pending: '\u23F3', supervising: '\uD83D\uDEE1', completed: '\u2705', refunded: '\uD83D\uDCB0', refunding: '\u23F3' }
+  return map[order.value.status] || '\uD83D\uDCC4'
 })
 const statusSub = computed(() => {
   const map = {

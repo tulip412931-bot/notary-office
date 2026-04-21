@@ -9,18 +9,21 @@
         <template #default="{ row }"><span :style="{ fontWeight: row.isRead ? 400 : 600 }">{{ row.title }}</span></template>
       </el-table-column>
       <el-table-column prop="content" label="内容" min-width="300" show-overflow-tooltip />
-      <el-table-column label="类型" width="100">
+      <el-table-column label="类型" width="100" align="center">
         <template #default="{ row }">
           <el-tag :type="{ merchant:'', refund:'warning', risk:'danger', system:'info', complaint:'warning' }[row.type]" size="small">{{ { merchant:'商户', refund:'退款', risk:'风险', system:'系统', complaint:'投诉' }[row.type] || row.type }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="createdAt" label="时间" width="160" />
-      <el-table-column label="操作" width="100">
+      <el-table-column prop="createdAt" label="时间" width="160" align="center" />
+      <el-table-column label="操作" width="100" align="center">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click="markRead(row)" v-if="!row.isRead">标为已读</el-button>
           <span v-else style="color:#999;font-size:12px">已读</span>
         </template>
       </el-table-column>
+      <template #empty>
+        <el-empty description="暂无通知消息" :image-size="80" />
+      </template>
     </el-table>
   </div>
 </template>

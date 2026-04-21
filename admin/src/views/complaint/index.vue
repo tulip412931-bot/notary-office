@@ -9,24 +9,27 @@
     </div>
 
     <el-table :data="tableData" stripe v-loading="loading">
-      <el-table-column prop="id" label="编号" width="80" />
+      <el-table-column prop="id" label="编号" width="80" align="center" />
       <el-table-column prop="merchantName" label="被投诉商户" min-width="160" show-overflow-tooltip />
       <el-table-column prop="customerName" label="投诉人" width="80" />
       <el-table-column prop="phone" label="联系电话" width="130" />
-      <el-table-column prop="type" label="投诉类型" width="100" />
+      <el-table-column prop="type" label="投诉类型" width="100" align="center" />
       <el-table-column prop="content" label="投诉内容" min-width="200" show-overflow-tooltip />
-      <el-table-column label="状态" width="90">
+      <el-table-column label="状态" width="90" align="center">
         <template #default="{ row }">
           <el-tag :type="{ pending:'warning', processing:'', resolved:'success' }[row.status]" size="small">{{ { pending:'待处理', processing:'处理中', resolved:'已解决' }[row.status] }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="createdAt" label="投诉日期" width="110" />
-      <el-table-column label="操作" width="100" fixed="right">
+      <el-table-column prop="createdAt" label="投诉日期" width="110" align="center" />
+      <el-table-column label="操作" width="100" fixed="right" align="center">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click="openHandle(row)" v-if="row.status!=='resolved'">处理</el-button>
           <span v-else style="color:#999;font-size:12px">已解决</span>
         </template>
       </el-table-column>
+      <template #empty>
+        <el-empty description="暂无投诉记录" :image-size="80" />
+      </template>
     </el-table>
 
     <el-dialog v-model="handleVisible" title="处理投诉" width="500px">

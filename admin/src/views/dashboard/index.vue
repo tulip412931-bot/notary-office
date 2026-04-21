@@ -34,16 +34,19 @@
     <!-- Alerts -->
     <div class="page-card">
       <div class="page-card-title">最新风险预警</div>
-      <el-table :data="alerts" stripe size="small">
-        <el-table-column prop="merchantName" label="商户名称" />
-        <el-table-column prop="type" label="预警类型" width="120" />
-        <el-table-column label="风险等级" width="100">
+      <el-table :data="alerts" stripe size="small" v-loading="alertsLoading">
+        <el-table-column prop="merchantName" label="商户名称" min-width="160" show-overflow-tooltip />
+        <el-table-column prop="type" label="预警类型" width="120" align="center" />
+        <el-table-column label="风险等级" width="100" align="center">
           <template #default="{ row }">
-            <span :class="'severity-' + row.severity">{{ { high: '高', medium: '中', low: '低' }[row.severity] }}</span>
+            <el-tag :type="{ high:'danger', medium:'warning', low:'success' }[row.severity]" size="small" effect="dark">{{ { high: '高', medium: '中', low: '低' }[row.severity] }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="content" label="预警内容" show-overflow-tooltip />
-        <el-table-column prop="createdAt" label="时间" width="120" />
+        <el-table-column prop="content" label="预警内容" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="createdAt" label="时间" width="160" align="center" />
+        <template #empty>
+          <el-empty description="暂无风险预警" :image-size="80" />
+        </template>
       </el-table>
     </div>
   </div>
@@ -57,6 +60,7 @@ import { fetchDashboardStats, fetchRecentAlerts } from '@/api'
 const orderChartRef = ref(null)
 const pieChartRef = ref(null)
 const alerts = ref([])
+const alertsLoading = ref(false)
 const statCards = reactive([
   { label: '入驻商户', value: 0, icon: 'OfficeBuilding', color: '#1a3c6e' },
   { label: '总订单数', value: 0, icon: 'Document', color: '#409eff' },
@@ -71,7 +75,8 @@ onMounted(async () => {
   statCards[2].value = (stats.escrowAmount / 10000).toFixed(1)
   statCards[3].value = stats.pendingReviews
 
-  alerts.value = await fetchRecentAlerts()
+  alertsLoading.value = true
+  try { alerts.value = await fetchRecentAlerts() } finally { alertsLoading.value = false }
   initOrderChart()
   initPieChart()
 })

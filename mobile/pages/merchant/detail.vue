@@ -66,10 +66,10 @@
 
       <!-- Products -->
       <view v-if="activeTab === 'products'">
-        <view class="product-item card" v-for="p in merchant.products" :key="p.id" @click="goProduct(p.id)">
+        <view class="product-item card" v-for="p in (merchant.products || [])" :key="p.id" @click="goProduct(p.id)">
           <view class="product-top">
             <view class="product-icon flex-center">
-              <text class="p-icon-text">{{ p.name[0] }}</text>
+              <text class="p-icon-text">{{ p.name ? p.name[0] : '商' }}</text>
             </view>
             <view class="product-info flex-1">
               <text class="product-name">{{ p.name }}</text>

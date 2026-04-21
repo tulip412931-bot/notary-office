@@ -6,23 +6,26 @@
     </div>
 
     <el-table :data="tableData" stripe v-loading="loading">
-      <el-table-column prop="id" label="ID" width="60" />
+      <el-table-column prop="id" label="ID" width="60" align="center" />
       <el-table-column prop="username" label="用户名" width="120" />
       <el-table-column prop="name" label="姓名" width="100" />
-      <el-table-column prop="roleName" label="角色" width="120" />
+      <el-table-column prop="roleName" label="角色" width="120" align="center" />
       <el-table-column prop="phone" label="联系电话" width="140" />
-      <el-table-column label="状态" width="90">
+      <el-table-column label="状态" width="90" align="center">
         <template #default="{ row }">
           <el-tag :type="row.status==='active'?'success':'info'" size="small">{{ row.status==='active'?'启用':'禁用' }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="lastLogin" label="最近登录" width="160" />
-      <el-table-column label="操作" width="160" fixed="right">
+      <el-table-column prop="lastLogin" label="最近登录" width="160" align="center" />
+      <el-table-column label="操作" width="160" fixed="right" align="center">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click="openEdit(row)">编辑</el-button>
           <el-button link :type="row.status==='active'?'danger':'success'" size="small" @click="toggleStatus(row)">{{ row.status==='active'?'禁用':'启用' }}</el-button>
         </template>
       </el-table-column>
+      <template #empty>
+        <el-empty description="暂无用户数据" :image-size="80" />
+      </template>
     </el-table>
 
     <el-dialog v-model="dialogVisible" :title="isEdit?'编辑用户':'新增用户'" width="460px">

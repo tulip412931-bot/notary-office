@@ -128,7 +128,7 @@ const goLogin = () => {
 
 const goPage = (url) => {
   if (!checkLogin()) return
-  if (url.startsWith('/pages/order/')) {
+  if (url === '/pages/order/list' || url === '/pages/merchant/list') {
     uni.switchTab({ url })
   } else {
     uni.navigateTo({ url })

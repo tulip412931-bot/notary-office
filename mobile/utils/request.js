@@ -27,7 +27,7 @@ const request = (options) => {
           } else if (res.data.code === 401) {
             uni.removeStorageSync('token')
             uni.removeStorageSync('userInfo')
-            uni.navigateTo({ url: '/pages/login/index' })
+            uni.reLaunch({ url: '/pages/login/index' })
             reject(res.data)
           } else {
             uni.showToast({ title: res.data.msg || '请求失败', icon: 'none' })

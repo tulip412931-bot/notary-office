@@ -1,6 +1,6 @@
 <template>
   <view class="status-badge" :class="badgeClass">
-    <text>{{ text }}</text>
+    <text>{{ displayText }}</text>
   </view>
 </template>
 

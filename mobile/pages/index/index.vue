@@ -169,7 +169,7 @@ const onRefresh = async () => {
 const loadMore = () => {}
 
 const goNotification = () => {
-  if (!checkLogin()) return
+  if (!checkLogin('/pages/notification/list')) return
   uni.navigateTo({ url: '/pages/notification/list' })
 }
 
@@ -183,12 +183,12 @@ const handleScan = () => {
 }
 
 const goRefund = () => {
-  if (!checkLogin()) return
+  if (!checkLogin('/pages/refund/list')) return
   uni.navigateTo({ url: '/pages/refund/list' })
 }
 
 const goComplaint = () => {
-  if (!checkLogin()) return
+  if (!checkLogin('/pages/complaint/submit')) return
   uni.navigateTo({ url: '/pages/complaint/submit' })
 }
 
@@ -197,6 +197,7 @@ const goHelp = () => {
 }
 
 const goCategory = (name) => {
+  uni.setStorageSync('selectedIndustry', name)
   uni.switchTab({ url: '/pages/merchant/list' })
 }
 

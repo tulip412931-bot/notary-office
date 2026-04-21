@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useUserStore } from '@/store/user'
 import { apiLogin, apiMerchantLogin } from '@/api/index'
 
@@ -48,6 +48,26 @@ const phone = ref('13800138000')
 const password = ref('123456')
 const agreed = ref(true)
 const userStore = useUserStore()
+const redirectUrl = ref('')
+
+onMounted(() => {
+  const pages = getCurrentPages()
+  const page = pages[pages.length - 1]
+  const opts = page.$page?.options || page.options || {}
+  if (opts.redirect) {
+    redirectUrl.value = decodeURIComponent(opts.redirect)
+  }
+})
+
+const tabBarPages = ['/pages/index/index', '/pages/order/list', '/pages/merchant/list', '/pages/mine/index']
+
+const navigateAfterLogin = (url) => {
+  if (tabBarPages.includes(url)) {
+    uni.switchTab({ url })
+  } else {
+    uni.redirectTo({ url })
+  }
+}
 
 const handleLogin = async () => {
   if (!phone.value || phone.value.length !== 11) {
@@ -67,7 +87,7 @@ const handleLogin = async () => {
     uni.hideLoading()
     uni.showToast({ title: '登录成功', icon: 'success' })
     setTimeout(() => {
-      uni.switchTab({ url: '/pages/index/index' })
+      navigateAfterLogin(redirectUrl.value || '/pages/index/index')
     }, 1000)
   } catch (e) {
     uni.hideLoading()

@@ -4,7 +4,7 @@
     <view class="fund-header">
       <view class="header-card">
         <text class="header-label">监管账户余额</text>
-        <text class="header-amount">¥1,860,000.00</text>
+        <text class="header-amount">¥{{ formatMoney(balance) }}</text>
         <text class="header-sub">公证处托管 · 招商银行 ****8866</text>
       </view>
     </view>
@@ -68,26 +68,31 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { apiGetSettlements } from '@/api/index'
+import { apiGetSettlements, apiGetMerchantStats } from '@/api/index'
 import { formatMoney as fm } from '@/utils/format'
 
 const currentTab = ref('settlement')
 const settlements = ref([])
 const formatMoney = fm
+const balance = ref(0)
 
-const detailRecords = [
+const detailRecords = ref([
   { title: '核销收入-年卡会员', desc: '张** 消费核销', amount: 10.88, time: '08-15 18:30' },
   { title: '核销收入-私教课程', desc: '李** 消费核销', amount: 340, time: '08-15 16:00' },
   { title: '核销收入-瑜伽季卡', desc: '王** 消费核销', amount: 74.44, time: '08-15 10:30' },
   { title: '月度结算到账', desc: '2024年7月结算', amount: 168000, time: '08-05 10:00' },
   { title: '退款扣除', desc: '赵** 退费', amount: -2388, time: '07-28 15:00' },
   { title: '核销收入-年卡会员', desc: '赵** 消费核销', amount: 10.88, time: '08-14 19:00' }
-]
+])
 
 const loadData = async () => {
   try {
-    const res = await apiGetSettlements()
+    const [res, statsRes] = await Promise.all([
+      apiGetSettlements(),
+      apiGetMerchantStats()
+    ])
     settlements.value = res.data.list || []
+    balance.value = statsRes.data.balance || 0
   } catch (e) { console.error(e) }
 }
 

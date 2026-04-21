@@ -1,10 +1,11 @@
 <template>
   <div class="login-page">
+    <div class="login-bg-pattern"></div>
     <div class="login-box">
       <div class="login-header">
-        <div class="emblem">公</div>
+        <div class="emblem">&#9878;</div>
         <h2>公证处预付费资金监管平台</h2>
-        <p>管理端登录</p>
+        <p class="login-subtitle">管理端登录</p>
       </div>
       <el-form ref="formRef" :model="form" :rules="rules" @keyup.enter="handleLogin">
         <el-form-item prop="username">
@@ -18,8 +19,8 @@
         </el-form-item>
         <el-button type="primary" size="large" style="width:100%;font-size:16px" :loading="loading" @click="handleLogin">登 录</el-button>
       </el-form>
-      <div style="text-align:center;margin-top:24px;font-size:12px;color:#999">
-        公证处预付费资金监管系统 v1.0
+      <div class="login-footer">
+        &#127963; 公证处预付费资金监管系统 v1.0
       </div>
     </div>
   </div>

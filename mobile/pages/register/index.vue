@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, onUnmounted } from 'vue'
 import { useUserStore } from '@/store/user'
 import { apiRegister } from '@/api/index'
 
@@ -95,6 +95,10 @@ const handleRegister = async () => {
 }
 
 const goLogin = () => { uni.navigateBack() }
+
+onUnmounted(() => {
+  if (timer) clearInterval(timer)
+})
 </script>
 
 <style lang="scss" scoped>

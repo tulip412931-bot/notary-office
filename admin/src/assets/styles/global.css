@@ -19,6 +19,16 @@ html, body, #app { height: 100%; font-family: "Microsoft YaHei", "PingFang SC", 
 .el-button--primary:hover { background-color: var(--primary-light) !important; border-color: var(--primary-light) !important; }
 .el-button--danger { background-color: var(--accent) !important; border-color: var(--accent) !important; }
 
+/* Table header styling */
+.el-table th.el-table__cell { background-color: #f5f7fa !important; color: var(--text-primary); font-weight: 600; font-size: 13px; }
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell { background: #fafbfc; }
+
+/* Tag consistency */
+.el-tag--danger { --el-tag-bg-color: #fef0f0; --el-tag-border-color: #fbc4c4; --el-tag-text-color: var(--accent); }
+.el-tag--danger.is-dark { background-color: var(--accent) !important; border-color: var(--accent) !important; }
+.el-tag--warning.is-dark { background-color: #e6a23c !important; border-color: #e6a23c !important; }
+.el-tag--success.is-dark { background-color: #67c23a !important; border-color: #67c23a !important; }
+
 /* Layout */
 .admin-layout { display: flex; height: 100vh; overflow: hidden; }
 .sidebar { width: 220px; background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%); color: #fff; flex-shrink: 0; display: flex; flex-direction: column; transition: width 0.3s; overflow: hidden; }
@@ -35,7 +45,7 @@ html, body, #app { height: 100%; font-family: "Microsoft YaHei", "PingFang SC", 
 .el-menu { border-right: none !important; background: transparent !important; }
 .el-menu .el-menu-item { color: rgba(255,255,255,0.75) !important; height: 44px; line-height: 44px; margin: 2px 8px; border-radius: 6px; }
 .el-menu .el-menu-item:hover { background: rgba(255,255,255,0.1) !important; color: #fff !important; }
-.el-menu .el-menu-item.is-active { background: var(--accent) !important; color: #fff !important; }
+.el-menu .el-menu-item.is-active { background: var(--accent) !important; color: #fff !important; font-weight: 600; box-shadow: 0 2px 8px rgba(196,30,58,0.3); }
 .el-menu .el-menu-item .el-icon { color: inherit !important; margin-right: 8px; font-size: 18px; }
 
 .main-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-main); }
@@ -65,16 +75,28 @@ html, body, #app { height: 100%; font-family: "Microsoft YaHei", "PingFang SC", 
 .login-page { height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); position: relative; overflow: hidden; }
 .login-page::before { content: ''; position: absolute; width: 600px; height: 600px; background: rgba(196,30,58,0.08); border-radius: 50%; top: -200px; right: -100px; }
 .login-page::after { content: ''; position: absolute; width: 400px; height: 400px; background: rgba(255,255,255,0.04); border-radius: 50%; bottom: -100px; left: -100px; }
+.login-page .login-bg-pattern { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 24px 24px; pointer-events: none; }
 .login-box { width: 420px; background: #fff; border-radius: 12px; padding: 48px 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); position: relative; z-index: 1; }
 .login-box .login-header { text-align: center; margin-bottom: 36px; }
-.login-box .login-header .emblem { width: 64px; height: 64px; background: var(--accent); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #fff; font-weight: bold; }
-.login-box .login-header h2 { font-size: 20px; color: var(--primary); margin-bottom: 6px; }
-.login-box .login-header p { font-size: 13px; color: var(--text-secondary); }
+.login-box .login-header .emblem { width: 72px; height: 72px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 36px; color: #fff; font-weight: bold; box-shadow: 0 4px 16px rgba(26,60,110,0.3); border: 3px solid rgba(255,255,255,0.2); }
+.login-box .login-header h2 { font-size: 20px; color: var(--primary); margin-bottom: 6px; letter-spacing: 1px; }
+.login-box .login-header .login-subtitle { font-size: 13px; color: var(--text-secondary); }
+.login-box .login-footer { text-align: center; margin-top: 24px; font-size: 12px; color: #999; }
 
 /* Severity badges */
-.severity-high { color: #f56c6c; font-weight: 600; }
+.severity-high { color: var(--accent); font-weight: 600; }
 .severity-medium { color: #e6a23c; font-weight: 600; }
 .severity-low { color: #67c23a; font-weight: 600; }
 
+/* Descriptions label styling */
+.el-descriptions__label { font-weight: 600; background-color: #f5f7fa !important; }
+
 /* Timeline */
 .order-timeline { padding: 20px; }
+
+/* Dialog header */
+.el-dialog__header { border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
+.el-dialog__footer { border-top: 1px solid var(--border-color); padding-top: 12px; }
+
+/* Empty state in tables */
+.el-table__empty-block { min-height: 120px; }

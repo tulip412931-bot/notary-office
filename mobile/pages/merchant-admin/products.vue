@@ -126,6 +126,11 @@ const saveProduct = async () => {
         sessions: parseInt(editingProduct.sessions) || 0,
         sales: 0
       })
+    } else {
+      const idx = products.value.findIndex(p => p.id === editingProduct.id)
+      if (idx !== -1) {
+        products.value[idx] = { ...products.value[idx], ...editingProduct }
+      }
     }
   } catch (e) { uni.hideLoading() }
 }

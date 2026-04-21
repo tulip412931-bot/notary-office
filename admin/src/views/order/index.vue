@@ -14,20 +14,23 @@
       <el-table-column prop="merchantName" label="商户" min-width="150" show-overflow-tooltip />
       <el-table-column prop="productName" label="产品" min-width="140" show-overflow-tooltip />
       <el-table-column prop="customerName" label="客户" width="80" />
-      <el-table-column label="金额" width="100"><template #default="{ row }">¥{{ row.amount?.toLocaleString() }}</template></el-table-column>
-      <el-table-column label="托管金额" width="110"><template #default="{ row }">¥{{ row.escrowAmount?.toLocaleString() }}</template></el-table-column>
-      <el-table-column prop="payMethod" label="支付方式" width="90" />
-      <el-table-column label="状态" width="90">
+      <el-table-column label="金额" width="100" align="right"><template #default="{ row }">¥{{ row.amount?.toLocaleString() }}</template></el-table-column>
+      <el-table-column label="托管金额" width="110" align="right"><template #default="{ row }">¥{{ row.escrowAmount?.toLocaleString() }}</template></el-table-column>
+      <el-table-column prop="payMethod" label="支付方式" width="90" align="center" />
+      <el-table-column label="状态" width="90" align="center">
         <template #default="{ row }">
           <el-tag :type="orderTagType(row.status)" size="small">{{ statusLabels[row.status] || row.status }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="createdAt" label="下单时间" width="110" />
-      <el-table-column label="操作" width="80" fixed="right">
+      <el-table-column prop="createdAt" label="下单时间" width="110" align="center" />
+      <el-table-column label="操作" width="80" fixed="right" align="center">
         <template #default="{ row }">
           <el-button link type="primary" size="small" @click="showDetail(row)">详情</el-button>
         </template>
       </el-table-column>
+      <template #empty>
+        <el-empty description="暂无订单数据" :image-size="80" />
+      </template>
     </el-table>
 
     <!-- Detail dialog -->

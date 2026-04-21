@@ -3,7 +3,13 @@ import { ref, computed } from 'vue'
 
 export const useUserStore = defineStore('user', () => {
   const token = ref(uni.getStorageSync('token') || '')
-  const userInfo = ref(JSON.parse(uni.getStorageSync('userInfo') || '{}'))
+  let parsedUserInfo = {}
+  try {
+    parsedUserInfo = JSON.parse(uni.getStorageSync('userInfo') || '{}')
+  } catch (e) {
+    parsedUserInfo = {}
+  }
+  const userInfo = ref(parsedUserInfo)
   const role = ref(uni.getStorageSync('userRole') || 'consumer')
 
   const isLoggedIn = computed(() => !!token.value)
